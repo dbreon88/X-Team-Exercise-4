@@ -50,7 +50,7 @@ public class Graph<E> implements GraphADT<E> {
     public E removeVertex(E vertex) {
         if (vertex == null) return null;
         for (int i = vertices.size() - 1; i >= 0; i--) {
-            if (vertices.get(i).data == vertex) {
+            if (vertices.get(i).data.equals(vertex)) {
                 E returnValue = vertices.get(i).data;
                 vertices.remove(i);
                 return returnValue;
