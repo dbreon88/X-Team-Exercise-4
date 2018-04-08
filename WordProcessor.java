@@ -68,7 +68,7 @@ public class WordProcessor {
 		return null;
 	}
 	
-	/**
+	d/**
 	 * Adjacency between word1 and word2 is defined by:
 	 * if the difference between word1 and word2 is of
 	 * 	1 char replacement
@@ -102,7 +102,7 @@ public class WordProcessor {
      * @return 2 for subtract edge
      * @return 3 for change edge
      */
-    private int findEdge(String a, String b) {
+    private static int findEdge(String a, String b) {
         if (a.equals(b)) return 0; // duplicate
         if (a.length() < b.length()+1 || a.length() > b.length()-1) { //if the length of a is more than 1 character different than the length of b, there can't be an edge.
             if (a.length() == b.length()) { //either a change edge or no edge
@@ -142,7 +142,7 @@ public class WordProcessor {
      * @param l the char array
      * @return a char array without the letter at index
      */
-    private char[] ignore(int index, char[] l) {
+    private static char[] ignore(int index, char[] l) {
         char[] returnArray = new char[l.length - 1];
         int newIndex = 0;
         for (int i = 0; i < l.length; i++) {
