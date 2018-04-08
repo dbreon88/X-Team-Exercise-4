@@ -39,7 +39,8 @@ public class Graph<E> implements GraphADT<E> {
      */
     @Override
     public E addVertex(E vertex) {
-        
+        this.vertices.add(new Vertex<E>(vertex));
+        return vertex;
     }
 
     /**
