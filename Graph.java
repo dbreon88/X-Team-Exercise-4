@@ -28,6 +28,8 @@ public class Graph<E> implements GraphADT<E> {
         }
     }
     
+    ArrayList<Vertex<E>> vertices = new ArrayList<Vertex<T>>();
+    
     /**
      * Instance variables and constructors
      */
