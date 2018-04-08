@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,6 +12,21 @@ import java.util.Set;
  * 
  */
 public class Graph<E> implements GraphADT<E> {
+    
+    class Vertex<T> {
+        T data;
+        ArrayList<Vertex<T>> neighbors; 
+        ArrayList<ArrayList<T>> shortestPaths;
+        ArrayList<Integer> shortestDistances; 
+        
+        public Vertex(T data){
+            this.data = data; 
+            this.neighbors = new ArrayList<Vertex<T>>();
+            this.shortestPaths = new ArrayList<ArrayList<T>>();
+            this.shortestDistances = new ArrayList<Integer>();
+  
+        }
+    }
     
     /**
      * Instance variables and constructors
