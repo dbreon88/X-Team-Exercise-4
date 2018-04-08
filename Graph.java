@@ -51,12 +51,17 @@ public class Graph<E> implements GraphADT<E> {
         
     }
 
-    /**
+  /**
      * {@inheritDoc}
      */
     @Override
     public boolean addEdge(E vertex1, E vertex2) {
-        
+    	if(vertex1.equals(null) || vertex2.equals(null) || vertex1.equals(vertex2))
+    		return false;
+    	else
+    		//TODO: add and edge (add the vertex2 neighbor to the vertex 1 neighbor array, 
+    		// and add the vertex1 neighbor to the vertex2 neighbor array).
+    		return false;
     }    
 
     /**
@@ -64,7 +69,12 @@ public class Graph<E> implements GraphADT<E> {
      */
     @Override
     public boolean removeEdge(E vertex1, E vertex2) {
-        
+        if(vertex1.equals(null) || vertex2.equals(null) || vertex1.equals(vertex2))
+        	return false; 
+        else
+    //TODO Finish this    	
+        	return true;
+    
     }
 
     /**
