@@ -63,22 +63,22 @@ public class Graph<E> implements GraphADT<E> {
      * {@inheritDoc}
      */
     @Override
-      public boolean addEdge(E vertex1, E vertex2) {
+    public boolean addEdge(E vertex1, E vertex2) {
     	int vertex1index = 0;
     	int vertex2index = 0;
     	if(vertex1.equals(null) || vertex2.equals(null) || vertex1.equals(vertex2))
     		return false;
     	else
-    		for(int i = 0; i < vertices.size(); i++) {
-    			if(vertices.get(i).equals(vertex1)) {
+    		for(int i = 0; i < vertices.size(); i++) { //iterates through the graph
+    			if(vertices.get(i).equals(vertex1)) { //finds vertex1
     				vertex1index = i; 
     			}
-    			if(vertices.get(i).equals(vertex2)) {
+    			if(vertices.get(i).equals(vertex2)) { //finds vertex2
     				vertex2index = i;
     			}		
     		}
-    		vertices.get(vertex1index).neighbors.add(vertices.get(vertex2index));
-    		vertices.get(vertex2index).neighbors.add(vertices.get(vertex1index));
+    		vertices.get(vertex1index).neighbors.add(vertices.get(vertex2index)); //adds vertex2 to the neighbor arrayList of vertex1
+    		vertices.get(vertex2index).neighbors.add(vertices.get(vertex1index)); //adds vertex1 to the neighbor arrayList of vertex2
     		
     	return true;
     }    
