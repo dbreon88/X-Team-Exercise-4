@@ -30,9 +30,9 @@ public class Graph<E> implements GraphADT<E> {
     
     ArrayList<Vertex<E>> vertices;
     
-    /**
-     * Instance variables and constructors
-     */
+    public Graph() {
+        this.vertices = new ArrayList<Vertex<E>>();
+    }
 
     /**
      * {@inheritDoc}
