@@ -1,10 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.Set;
-
 /**
  * Undirected and unweighted graph implementation
  * 
@@ -36,7 +32,7 @@ public class Graph<E> implements GraphADT<E> {
     HashMap<E, Vertex<E>> vertices;
     
     public Graph() {
-        this.vertices = new LinkedHashMap<E, Vertex<E>>();
+        this.vertices = new HashMap<E, Vertex<E>>();
     }
 
     /**
