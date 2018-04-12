@@ -1,9 +1,7 @@
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
@@ -153,7 +151,7 @@ public class GraphProcessor {
      */
     public void shortestPathPrecomputation() {
     	// Floyd-Warshall Path Reconstruction Algorithm
-    	tempGetGraphSize();  // update size of graph
+    	graphSize = words.size();
 		Iterator<String> vertices_itr = graph.getAllVertices().iterator();
 		// below could be a pretty cool lambda expression if we want
 		// populate the arrays dist and next
@@ -185,21 +183,4 @@ public class GraphProcessor {
 			}
 		}
 	}
-
-    /**
-     * Temporary method to get size of graph
-     * Alternate method would be preferred, unable to do graph.getGraphSize
-     * because getGraphSize is not of GraphADT
-     * Open to suggestions
-     * 
-     * Update: this could be replaced with words.size();
-     * @return size of graph
-     */
-    private void tempGetGraphSize() {
-		Iterator<String> itr = graph.getAllVertices().iterator();
-		while (itr.hasNext()){
-			graphSize ++;
-		}
-		return;
-    }
 }
