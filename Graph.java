@@ -44,6 +44,9 @@ public class Graph<E> implements GraphADT<E> {
      */
     @Override
     public E addVertex(E vertex) {
+    	if(vertex == null || vertices.containsKey(vertex)) {
+    		return null;
+    	}
     	this.vertices.put(vertex, new Vertex<E>(vertex));
         return vertex;
     }
@@ -55,26 +58,25 @@ public class Graph<E> implements GraphADT<E> {
     public E removeVertex(E vertex) {
         if (vertex == null || !vertices.containsKey(vertex)) return null;
         boolean removed = false;
-        
-        Iterator<E> itr = vertices.get(vertex).
-        boolean removed = vertices.remove(vertex, new Vertex<E>(vertex));
-        if (removed){
-        	return vertex;
+        Vertex<E> removeVertex = vertices.get(vertex);  // vertex to be removed        
+        // for each neighbor of this vertex
+        Iterator<E> itr = vertices.get(vertex).neighbors.iterator();
+        while(itr.hasNext()){
+        	Vertex<E> tempNeighbor = vertices.get(itr.next());
+        	// remove vertex from their list of neighbors
+        	removed = tempNeighbor.neighbors.remove(vertex);
+        	// if vertex cannot be removed from neighbor's list
+        	if (!removed){
+        		return null;
+        	}
         }
-        else{
+        removed = vertices.remove(vertex, removeVertex);
+        if (!removed){  // if vertex cannot be removed
         	return null;
         }
-        
-        /**
-        for (int i = vertices.size() - 1; i >= 0; i--) {
-            if (vertices.get(i).data.equals(vertex)) {
-                E returnValue = vertices.get(i).data;
-                vertices.remove(i);
-                return returnValue;
-            }
+        else{
+        	return vertex;
         }
-        return null;
-        */
     }
 
   /**
@@ -93,10 +95,10 @@ public class Graph<E> implements GraphADT<E> {
     		added2 = vertices.get(vertex2).neighbors.add(vertex1);
     		// check that edges were added
     		if (added1 && added2) {  // if both were added
-    			return false;
+    			return true;
     		}
     		else {
-    			return true;
+    			return false;
     		}
     	}
     }    
@@ -117,10 +119,10 @@ public class Graph<E> implements GraphADT<E> {
     		removed2 = vertices.get(vertex2).neighbors.remove(vertex1);
     		// check that edges were removed
     		if (removed1 && removed2){  // if both were removed
-    			return false;
+    			return true;
     		}
     		else {
-    			return true;
+    			return false;
     		}
     	}
     }
