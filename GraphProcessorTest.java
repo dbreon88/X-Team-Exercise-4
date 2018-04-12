@@ -28,6 +28,7 @@ public class GraphProcessorTest {
     @Before
     public void setUp() throws Exception {
         this.processor = new GraphProcessor();
+        processor.populateGraph("word_list.txt");
     }
     
     @After
@@ -35,15 +36,5 @@ public class GraphProcessorTest {
         this.processor = null;
     }
     
-    @Test
-    public final void populateGraph() {
-        try {
-        processor.populateGraph("word_list.txt");
-        }
-        catch (IOException e) {
-            System.out.println("failed!!");
-            return;
-        }
-        assertEquals(true, true);
-    }
+
 }
