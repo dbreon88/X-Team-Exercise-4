@@ -86,11 +86,7 @@ public class WordProcessor {
 	 * @return true if word1 and word2 are adjacent else false
 	 */
 	public static boolean isAdjacent(String word1, String word2) {
-		if (findEdge(word1, word2) == 0) {
-			return false;
-		} else {
-			return true;
-		}
+		return findEdge(word1, word2);
 	}
 
 	/**
@@ -102,8 +98,8 @@ public class WordProcessor {
      * @return 2 for subtract edge
      * @return 3 for change edge
      */
-    private static int findEdge(String a, String b) {
-        if (a.equals(b)) return 0; // duplicate
+    private static boolean findEdge(String a, String b) {
+        if (a.equals(b)) return false; // duplicate
         if (a.length() < b.length()+1 || a.length() > b.length()-1) { //if the length of a is more than 1 character different than the length of b, there can't be an edge.
             if (a.length() == b.length()) { //either a change edge or no edge
                 //break a and b into an array of characters
@@ -115,7 +111,7 @@ public class WordProcessor {
                     bArray[n] = aArray[n];
                     //if the arrays are the same, this is a change edge. If not, reset bArray, and try the next letter.
                     if (new String(aArray).equals(new String(bArray))) {
-                        return 3;
+                        return true;
                     } else {
                         bArray[n] = temp;
                     }
@@ -127,13 +123,13 @@ public class WordProcessor {
                 String s = (a.length() > b.length())? b : a;
                 for (int n = 0; n < l.length(); n++) { // try deleting each of the letters in the longer string
                     if (new String(ignore(n, lArray)).equals(s)) { // if they match, return 1 or 2
-                        return (a.length() > b.length())? 2 : 1; // return 1 if b is longer (an add edge) and 2 if a is longer (a subtract edge)
+                        return true;
                     }
                 }
             }
         }
         //no edges detected
-        return 0;
+        return false;
     }
 
     /**
