@@ -87,12 +87,15 @@ public class GraphProcessor {
             this.graph.addVertex(word);
             counter++;
             if (!this.graph.isEmpty()) {
-                for (String element: this.graph.getAllVertices()) {
-                    if (graph.isAdjacent(element, word)) {
-                        graph.addEdge(element, word);
-                    }
-                }
-                
+            	// iterator
+            	Iterator<String> itr = this.graph.getAllVertices().iterator();
+            	// for each in iterator
+            	itr.forEachRemaining(element-> {
+            		// do this method
+            		if(graph.isAdjacent(element, word)){
+            			graph.addEdge(element, word);
+            		}
+            	});
             }
         }
         
