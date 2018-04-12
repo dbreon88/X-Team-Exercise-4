@@ -80,7 +80,7 @@ public class GraphProcessor {
         // but also be added to an arrayList of words, then implementation of
         // Floyd-Warshall Path Reconstruction Algorithm should work
         
-        Stream<String> wordStream = getWordStream(filePath);
+        Stream<String> wordStream = WordProcessor.getWordStream(filePath);
         wordStream.forEach(words::add);
         Integer counter = 0;
         for (String word : this.words) {
@@ -223,21 +223,4 @@ public class GraphProcessor {
         return;
     }
     
-    private Stream<String> getWordStream(String filePath) throws IOException {
-        try { 
-        Stream<String> wordStream = 
-                        Files.lines(Paths.get(filePath));
-        wordStream
-        .map(String::trim)
-        .filter(x -> x!=null && !x.equals(""))
-        .map(String::toUpperCase);
-        return wordStream;
-        }
-        catch (IOException e) {
-            System.out.println(e.getMessage());
-            return null;
-        }
-        
-        
-    }
 }
