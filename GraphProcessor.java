@@ -191,6 +191,8 @@ public class GraphProcessor {
      * Alternate method would be preferred, unable to do graph.getGraphSize
      * because getGraphSize is not of GraphADT
      * Open to suggestions
+     * 
+     * Update: this could be replaced with words.size();
      * @return size of graph
      */
     private void tempGetGraphSize() {
