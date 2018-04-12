@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Set;
 
 /**
@@ -15,23 +17,26 @@ public class Graph<E> implements GraphADT<E> {
     
     class Vertex<T> {
         T data;
-        ArrayList<Vertex<T>> neighbors; 
+        ArrayList<E> neighbors; 
+        /**
         ArrayList<ArrayList<T>> shortestPaths;
         ArrayList<Integer> shortestDistances; 
-        
+        */
         public Vertex(T data){
             this.data = data; 
-            this.neighbors = new ArrayList<Vertex<T>>();
+            this.neighbors = new ArrayList<E>();
+            /**
             this.shortestPaths = new ArrayList<ArrayList<T>>();
             this.shortestDistances = new ArrayList<Integer>();
+            */
   
         }
     }
     
-    ArrayList<Vertex<E>> vertices;
+    HashMap<E, Vertex<E>> vertices;
     
     public Graph() {
-        this.vertices = new ArrayList<Vertex<E>>();
+        this.vertices = new LinkedHashMap<E, Vertex<E>>();
     }
 
     /**
@@ -39,7 +44,7 @@ public class Graph<E> implements GraphADT<E> {
      */
     @Override
     public E addVertex(E vertex) {
-        this.vertices.add(new Vertex<E>(vertex));
+    	this.vertices.put(vertex, new Vertex<E>(vertex));
         return vertex;
     }
 
@@ -48,7 +53,19 @@ public class Graph<E> implements GraphADT<E> {
      */
     @Override
     public E removeVertex(E vertex) {
-        if (vertex == null) return null;
+        if (vertex == null || !vertices.containsKey(vertex)) return null;
+        boolean removed = false;
+        
+        Iterator<E> itr = vertices.get(vertex).
+        boolean removed = vertices.remove(vertex, new Vertex<E>(vertex));
+        if (removed){
+        	return vertex;
+        }
+        else{
+        	return null;
+        }
+        
+        /**
         for (int i = vertices.size() - 1; i >= 0; i--) {
             if (vertices.get(i).data.equals(vertex)) {
                 E returnValue = vertices.get(i).data;
@@ -57,6 +74,7 @@ public class Graph<E> implements GraphADT<E> {
             }
         }
         return null;
+        */
     }
 
   /**
@@ -64,23 +82,23 @@ public class Graph<E> implements GraphADT<E> {
      */
     @Override
     public boolean addEdge(E vertex1, E vertex2) {
-    	int vertex1index = 0;
-    	int vertex2index = 0;
-    	if(vertex1.equals(null) || vertex2.equals(null) || vertex1.equals(vertex2))
+    	boolean added1, added2 = false;
+    	if(vertex1.equals(vertex2) || !vertices.containsKey(vertex1) || !vertices.containsKey(vertex2)) {
     		return false;
-    	else
-    		for(int i = 0; i < vertices.size(); i++) { //iterates through the graph
-    			if(vertices.get(i).equals(vertex1)) { //finds vertex1
-    				vertex1index = i; 
-    			}
-    			if(vertices.get(i).equals(vertex2)) { //finds vertex2
-    				vertex2index = i;
-    			}		
+    	}
+    	else {
+    		// add vertex2 to vertex1's neighbors
+    		added1 = vertices.get(vertex1).neighbors.add(vertex2);
+    		// add vertex1 to vertex2's neighbors
+    		added2 = vertices.get(vertex2).neighbors.add(vertex1);
+    		// check that edges were added
+    		if (added1 && added2) {  // if both were added
+    			return false;
     		}
-    		vertices.get(vertex1index).neighbors.add(vertices.get(vertex2index)); //adds vertex2 to the neighbor arrayList of vertex1
-    		vertices.get(vertex2index).neighbors.add(vertices.get(vertex1index)); //adds vertex1 to the neighbor arrayList of vertex2
-    		
-    	return true;
+    		else {
+    			return true;
+    		}
+    	}
     }    
 
     /**
@@ -88,12 +106,23 @@ public class Graph<E> implements GraphADT<E> {
      */
     @Override
     public boolean removeEdge(E vertex1, E vertex2) {
-        if(vertex1.equals(null) || vertex2.equals(null) || vertex1.equals(vertex2))
-        	return false; 
-        else
-    //TODO Finish this    	
-        	return true;
-    
+    	boolean removed1, removed2 = false;
+    	if(vertex1.equals(vertex2) || !vertices.containsKey(vertex1) || !vertices.containsKey(vertex2)) {
+    		return false;
+    	}
+    	else {
+    		// remove vertex2 from vertex1's neighbors
+    		removed1 = vertices.get(vertex1).neighbors.remove(vertex2);
+    		// remove vertex1 from vertex2's neighbors
+    		removed2 = vertices.get(vertex2).neighbors.remove(vertex1);
+    		// check that edges were removed
+    		if (removed1 && removed2){  // if both were removed
+    			return false;
+    		}
+    		else {
+    			return true;
+    		}
+    	}
     }
 
     /**
@@ -101,23 +130,48 @@ public class Graph<E> implements GraphADT<E> {
      */
     @Override
     public boolean isAdjacent(E vertex1, E vertex2) {
-        
+    	boolean adjacent1 = false, adjacent2 = false;
+    	if(vertex1.equals(vertex2) || !vertices.containsKey(vertex1) || !vertices.containsKey(vertex2)) {
+    		return false;
+    	}
+    	else {
+    		// check vertex2 is one of vertex1's neighbors
+    		Iterator<E> itr = this.getNeighbors(vertex1).iterator();
+    		while (itr.hasNext()){
+    			if (itr.next().equals(vertex2)){
+    				adjacent1 = true;
+    			}
+    		}
+    		// check vertex 1 if one of vertex2's neighbors
+    		Iterator<E> itr2 = this.getNeighbors(vertex2).iterator();
+    		while (itr2.hasNext()){
+    			if (itr2.next().equals(vertex1)){
+    				adjacent2 = true;
+    			}
+    		}
+    		if (adjacent1 && adjacent2){  // if both were adjacent
+    			return true;
+    		}
+    		else{
+    			return false;
+    		}
+    	}
     }
 
     /**
      * {@inheritDoc}
      */
-    @Override
+	@Override
     public Iterable<E> getNeighbors(E vertex) {
-        
+    	return vertices.get(vertex).neighbors;
     }
 
     /**
      * {@inheritDoc}
      */
-    @Override
+	@Override
     public Iterable<E> getAllVertices() {
-        
+        return vertices.keySet();
     }
 
 }
