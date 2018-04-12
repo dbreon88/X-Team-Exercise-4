@@ -333,4 +333,27 @@ public class GraphTest {
 		assertEquals("num of vertices in the graph", numOfVertices-2, verticesCount);
 	}
 
+	@Test
+	public final void returnCorrectSize(){
+		Graph<String> test_graph = new Graph<String>();
+		boolean trueSize = false;
+		// Add all vertices
+		for (String itrVertex : vertices)
+			test_graph.addVertex(itrVertex);
+		//Check that total number of vertices is equal to graph size
+		if (GraphTest.numOfVertices == test_graph.getGraphSize()){
+			trueSize = true;
+		}
+		assertEquals(String.format("graph size (%s) equals added number of vertices (%s)", 
+				test_graph.getGraphSize(), GraphTest.numOfVertices), true, trueSize);
+	}
+	/**
+	 * 
+	 * End of Graph class Tests
+	 * 
+	 * Begin GraphProcessor Tests
+	 * 
+	 */
+	
+	
 }

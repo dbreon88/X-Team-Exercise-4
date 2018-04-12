@@ -14,6 +14,7 @@ public class Graph<E> implements GraphADT<E> {
     class Vertex<T> {
         T data;
         ArrayList<E> neighbors; 
+        int index;
         /**
         ArrayList<ArrayList<T>> shortestPaths;
         ArrayList<Integer> shortestDistances; 
@@ -25,11 +26,13 @@ public class Graph<E> implements GraphADT<E> {
             this.shortestPaths = new ArrayList<ArrayList<T>>();
             this.shortestDistances = new ArrayList<Integer>();
             */
-  
+        }
+        public void setIndex(int index){
+        	this.index = index;
         }
     }
     
-    HashMap<E, Vertex<E>> vertices;
+    private HashMap<E, Vertex<E>> vertices;
     
     public Graph() {
         this.vertices = new HashMap<E, Vertex<E>>();
@@ -172,4 +175,11 @@ public class Graph<E> implements GraphADT<E> {
         return vertices.keySet();
     }
 
+	/**
+	 * Returns the size of the vertices HashMap
+	 * @return size of Graph HashMap (Vertices)
+	 */
+	public int getGraphSize(){
+		return vertices.size();
+	}
 }

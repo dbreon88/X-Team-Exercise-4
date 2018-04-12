@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Supplier;
@@ -41,13 +42,20 @@ public class GraphProcessor {
      * Graph which stores the dictionary words and their associated connections
      */
     private GraphADT<String> graph;
-    private 
+    private int graphSize;
+    ArrayList<String> words;
+    int[][] dist = new int[graphSize][graphSize];  // array of minimum distances
+	String[][] next = new String[graphSize][graphSize];  // array of vertex indices
+	
+    
 
     /**
      * Constructor for this class. Initializes instances variables to set the starting state of the object
      */
     public GraphProcessor() {
         this.graph = new Graph<>();
+        java.util.Arrays.fill(dist, Integer.MAX_VALUE);  // fill with "infinity"
+        java.util.Arrays.fill(next, null);  //initial all to null
     }
         
     /**
@@ -65,6 +73,9 @@ public class GraphProcessor {
      * @return Integer the number of vertices (words) added
      */
     public Integer populateGraph(String filepath) {
+    	// if these can come in a stream, populate the graph,
+    	// but also be added to an arrayList of words, then implementation of
+    	// Floyd-Warshall Path Reconstruction Algorithm should work
         return 0;
     
     }
@@ -88,8 +99,28 @@ public class GraphProcessor {
      * @return List<String> list of the words
      */
     public List<String> getShortestPath(String word1, String word2) {
-        return null;
-    
+        String nextWord = "";
+    	int index1 = words.indexOf(word1);
+        int index2 = words.indexOf(word2);
+    	List<String> path = new ArrayList<String>();
+    	// if path does not exist
+    	if (next[index1][index2] == null){
+    		return path;  // return empty path
+    	}
+    	else{
+    		// add first word to path
+    		path.add(word1);
+    		// while next word does not equal final word
+    		while (!nextWord.equals(word2)){
+    			// get next word
+    			nextWord = next[index1][index2];
+    			// update next index
+    			index1 = words.indexOf(nextWord);
+    			// add next word to path
+    			path.add(nextWord);
+    		}
+    		return path;
+    	}
     }
     
     /**
@@ -110,7 +141,9 @@ public class GraphProcessor {
      * @return Integer distance
      */
     public Integer getShortestDistance(String word1, String word2) {
-        return null;
+        int index1 = words.indexOf(word1);
+        int index2 = words.indexOf(word2);
+        return dist[index1][index2];
     }
     
     /**
@@ -120,6 +153,51 @@ public class GraphProcessor {
      */
     public void shortestPathPrecomputation() {
     	// Floyd-Warshall Path Reconstruction Algorithm
-    	String[][] dist[][] = new String[graph.][]
+    	tempGetGraphSize();  // update size of graph
+		Iterator<String> vertices_itr = graph.getAllVertices().iterator();
+		// below could be a pretty cool lambda expression if we want
+		// populate the arrays dist and next
+		// for every vertice in graph
+		while (vertices_itr.hasNext()){
+			String curVertice = vertices_itr.next();
+			int indexCur = words.indexOf(curVertice);
+			Iterator<String> edge_itr = graph.getNeighbors(curVertice).iterator();
+			// for every edge of this vertice
+			while (edge_itr.hasNext()){
+				String edgeVertice = edge_itr.next();
+				int indexEdge = words.indexOf(edgeVertice);
+				// I hope this works:
+				dist[indexCur][indexEdge] = 1;
+				next[indexCur][indexEdge] = edgeVertice;
+			}
+			for (int k = 0; k < graphSize; k ++){
+				for (int i = 0; i < graphSize; i++){
+					for (int j = 0; j < graphSize; j++){
+						// if a shorter distance between i and j is found 
+						if (dist[i][j] > dist[i][k] + dist[k][j]){
+							// update the distance
+							dist[i][j] = dist[i][k] + dist[k][j];
+							// fix the link
+							next[i][j] = next[i][k];
+						}
+					}
+				}
+			}
+		}
+	}
+
+    /**
+     * Temporary method to get size of graph
+     * Alternate method would be preferred, unable to do graph.getGraphSize
+     * because getGraphSize is not of GraphADT
+     * Open to suggestions
+     * @return size of graph
+     */
+    private void tempGetGraphSize() {
+		Iterator<String> itr = graph.getAllVertices().iterator();
+		while (itr.hasNext()){
+			graphSize ++;
+		}
+		return;
     }
 }
