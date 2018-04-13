@@ -93,6 +93,6 @@ public class GraphProcessorTest {
     @Test
     public void testIsAdjacentIfWordsAreDuplicates() throws Exception {
         String[] strings = {"test", "test"};
-        assertEquals("words are more than one character off by adding", false, WordProcessor.isAdjacent(strings[0], strings[1]));
+        assertEquals("words are duplicates", false, WordProcessor.isAdjacent(strings[0], strings[1]));
     }
 }
