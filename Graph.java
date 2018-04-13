@@ -196,11 +196,12 @@ public class Graph<E> implements GraphADT<E> {
     
     public void printGraph() {
     	for(Vertex<E> V : vertices.values()) {
-    		System.out.print(V.data + ": ");
+    		System.out.print(V.data + ":\nNeighbors: ");
     		for(E W : V.neighbors) {
+    			//System.out.print("Neighbors: ");
     			System.out.print(W + ", ");
     		}
-    		System.out.println();
+    		System.out.println("\n");
     	}
     	
     }
