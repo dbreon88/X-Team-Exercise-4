@@ -72,14 +72,17 @@ public class WordProcessor {
             .map(String::trim)
             .filter(x -> x!=null && !x.equals(""))
             .map(String::toUpperCase);
+            System.out.println("Returing Stream");
             return wordStream;
             }
             catch (IOException e) {
+                System.out.println("ioExcetion");
                 System.out.println(e.getMessage());
+                
                 return null;
             }
             
-           
+
     }
     
     /**
