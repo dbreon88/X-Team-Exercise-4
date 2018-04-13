@@ -90,15 +90,18 @@ public class Graph<E> implements GraphADT<E> {
      */
     @Override
     public boolean addEdge(E vertex1, E vertex2) {
-        boolean added1, added2 = false;
+        boolean added1 = false;
+        boolean added2 = false;
         if(vertex1.equals(vertex2) || !vertices.containsKey(vertex1) || !vertices.containsKey(vertex2)) {
             return false;
         }
         else {
-            // add vertex2 to vertex1's neighbors
-            added1 = vertices.get(vertex1).neighbors.add(vertex2);
-            // add vertex1 to vertex2's neighbors
-            added2 = vertices.get(vertex2).neighbors.add(vertex1);
+        	if (!vertices.get(vertex1).neighbors.contains(vertex2)){
+        		// add vertex2 to vertex1's neighbors
+                added1 = vertices.get(vertex1).neighbors.add(vertex2);
+                // add vertex1 to vertex2's neighbors
+                added2 = vertices.get(vertex2).neighbors.add(vertex1);
+        	}
             // check that edges were added
             if (added1 && added2) {  // if both were added
                 return true;

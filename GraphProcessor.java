@@ -98,12 +98,11 @@ public class GraphProcessor {
                 while(itr.hasNext()){
                 	String element = itr.next();
                 	if (WordProcessor.isAdjacent(element, word)){
-                        graph.addEdge(itr.next(), word);
+                        graph.addEdge(element, word);
                     }
                 }
             }
         }
-        /**
         // iterator
         Iterator<String> itr = this.graph.getAllVertices().iterator();
         // for each in iterato
@@ -111,12 +110,14 @@ public class GraphProcessor {
         	String element = itr.next();
         	System.out.println(element);
         	Iterator<String> itr2 = this.graph.getNeighbors(element).iterator();
+        	System.out.println("Neighbors: ");
         	while(itr2.hasNext()){
-        		System.out.println(1);
+        		System.out.print(itr2.next() +", ");
         	}
+        	System.out.println();
+        	System.out.println();
 
         }
-        */
         
         return counter;
     
