@@ -90,14 +90,28 @@ public class GraphProcessor {
                 // iterator
                 Iterator<String> itr = this.graph.getAllVertices().iterator();
                 // for each in iterator
-                itr.forEachRemaining(element-> {
-                    // do this method
-                    if(graph.isAdjacent(element, word)){
-                        graph.addEdge(element, word);
-                    }
-                });
+                while(itr.hasNext()){
+                	String element = itr.next();
+                	Iterator<String> itr2 = this.graph.getNeighbors(itr.next()).iterator();
+                	while(itr2.hasNext()){
+                		String word = itr2.next();
+                    	if (graph.isAdjacent(element, word)){
+                    		System.out.println
+                            graph.addEdge(itr.next(), word);
+                        }
+                	}
+
+                }
             }
         }
+        Iterator<String> itr = this.graph.getAllVertices().iterator();
+     // for each in iterator
+        itr.forEachRemaining(element-> {
+        	System.out.print(element);
+        	Iterator<String> itr2 = this.graph.getNeighbors(element).iterator();
+        	itr2.forEachRemaining(word -> System.out.println(1));
+        	System.out.println();
+        });
         
         return counter;
     
