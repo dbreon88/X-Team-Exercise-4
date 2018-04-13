@@ -2,7 +2,7 @@
 Exercise 4, P4 Dictionary 
 
 
-TO-DO: 
+TO-DO: <br />
 -Create tests for edge cases (ex. adding null vertices, distance between non existant path, getpath for non existant path, etc.) <br />
 -Fix getShortestDistance <br />
 -Write tests for GetPath, GetShortestDistance <br />
