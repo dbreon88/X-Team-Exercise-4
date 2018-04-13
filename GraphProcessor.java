@@ -8,8 +8,9 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Supplier;
-import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import static java.util.stream.Collectors.toList;
 
 /**
  * This class adds additional functionality to the graph as a whole.
@@ -80,24 +81,24 @@ public class GraphProcessor {
         // if these can come in a stream, populate the graph,
         // but also be added to an arrayList of words, then implementation of
         // Floyd-Warshall Path Reconstruction Algorithm should work
-        
-        Stream<String> wordStream = WordProcessor.getWordStream(filePath);
-		//Collector<Object> collector = new Collector<Object>();
-        words = wordStream.collect(toList());
+    	if (WordProcessor.getWordStream(filePath).equals(null)){
+    		System.out.println("stream is null");
+    	}
+        words = WordProcessor.getWordStream(filePath).collect(toList());
         Integer counter = 0;
         for (String word : words) {
             this.graph.addVertex(word);
             counter++;
             if (!this.graph.isEmpty()) {
-            	// iterator
-            	Iterator<String> itr = this.graph.getAllVertices().iterator();
-            	// for each in iterator
-            	itr.forEachRemaining(element-> {
-            		// do this method
-            		if(graph.isAdjacent(element, word)){
-            			graph.addEdge(element, word);
-            		}
-            	});
+                // iterator
+                Iterator<String> itr = this.graph.getAllVertices().iterator();
+                // for each in iterator
+                itr.forEachRemaining(element-> {
+                    // do this method
+                    if(graph.isAdjacent(element, word)){
+                        graph.addEdge(element, word);
+                    }
+                });
             }
         }
         
@@ -178,7 +179,7 @@ public class GraphProcessor {
      */
     public void shortestPathPrecomputation() {
         // Floyd-Warshall Path Reconstruction Algorithm
-    	graphSize = words.size();
+        graphSize = words.size();
         Iterator<String> vertices_itr = graph.getAllVertices().iterator();
         // below could be a pretty cool lambda expression if we want
         // populate the arrays dist and next
@@ -210,5 +211,6 @@ public class GraphProcessor {
             }
         }
     }
+    
     
 }

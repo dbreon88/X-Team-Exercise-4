@@ -1,13 +1,16 @@
+import java.io.IOException;
 
 public class Main {
 
-	public static void main(String[] args) {
-		try{
-			WordProcessor proc = new WordProcessor();
-		} catch (Exception e){
-			System.out.println(e.getStackTrace());
-		}
-		
-	}
+    public static void main(String[] args) {
+       GraphProcessor proc = new GraphProcessor();
+       try {
+       proc.populateGraph("word_list.txt");
+       }
+       catch (IOException e) {
+           System.out.println(e.getMessage());
+       }
+       System.out.println(proc.toString());
+    }
 
 }

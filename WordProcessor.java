@@ -68,14 +68,15 @@ public class WordProcessor {
             try { 
             Stream<String> wordStream = 
                             Files.lines(Paths.get(filepath));
-            wordStream
+            return wordStream
             .map(String::trim)
             .filter(x -> x!=null && !x.equals(""))
             .map(String::toUpperCase);
-            return wordStream;
+            
             }
             catch (IOException e) {
                 System.out.println(e.getMessage());
+                System.out.println("enters");
                 return null;
             }
             
