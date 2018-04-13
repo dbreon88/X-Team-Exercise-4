@@ -11,6 +11,8 @@ public class Main {
            System.out.println(e.getMessage());
        }
        
+       proc.shortestPathPrecomputation();
+       System.out.println(proc.getShortestDistance("cat", "wheat"));
     }
 
 }

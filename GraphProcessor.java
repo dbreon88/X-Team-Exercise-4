@@ -48,8 +48,8 @@ public class GraphProcessor {
     private Graph<String> graph;
     private int graphSize;
     List<String> words;
-    int[][] dist = new int[graphSize][graphSize];  // array of minimum distances
-    String[][] next = new String[graphSize][graphSize];  // array of vertex indices
+    int[][] dist; 
+    String[][] next;
     
     
 
@@ -58,8 +58,6 @@ public class GraphProcessor {
      */
     public GraphProcessor() {
         this.graph = new Graph<>();
-        java.util.Arrays.fill(dist, Integer.MAX_VALUE);  // fill with "infinity"
-        java.util.Arrays.fill(next, null);  //initial all to null
         this.words = new ArrayList<String>();
     }
         
@@ -184,6 +182,9 @@ public class GraphProcessor {
      * @return Integer distance
      */
     public Integer getShortestDistance(String word1, String word2) {
+    	word1 = word1.toUpperCase().trim();
+    	word2 = word2.toUpperCase().trim();
+    	
         int index1 = words.indexOf(word1);
         int index2 = words.indexOf(word2);
         return dist[index1][index2];
@@ -197,6 +198,11 @@ public class GraphProcessor {
     public void shortestPathPrecomputation() {
         // Floyd-Warshall Path Reconstruction Algorithm
         graphSize = words.size();
+        dist = new int[graphSize][graphSize];  // array of minimum distances
+        next = new String[graphSize][graphSize];  // array of vertex indices
+        //java.util.Arrays.fill(dist, Integer.MAX_VALUE);  // fill with "infinity"
+        //java.util.Arrays.fill(next, null);  //initial all to null
+        
         Iterator<String> vertices_itr = graph.getAllVertices().iterator();
         // below could be a pretty cool lambda expression if we want
         // populate the arrays dist and next
