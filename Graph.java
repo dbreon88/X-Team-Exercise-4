@@ -14,12 +14,28 @@ public class Graph<E> implements GraphADT<E> {
     class Vertex<T> {
         T data;
         ArrayList<E> neighbors; 
+        int index;
+        /**
+        ArrayList<ArrayList<T>> shortestPaths;
+        ArrayList<Integer> shortestDistances; 
+        */
         public Vertex(T data){
             this.data = data; 
             this.neighbors = new ArrayList<E>();
+            /**
+            this.shortestPaths = new ArrayList<ArrayList<T>>();
+            this.shortestDistances = new ArrayList<Integer>();
+            */
+        }
+        public void setIndex(int index){
+            this.index = index;
         }
         public T getData() {
             return this.data;
+        }
+        @Override
+        public String toString() {
+            return this.data.toString();
         }
     }
     
@@ -163,6 +179,9 @@ public class Graph<E> implements GraphADT<E> {
      */
     @Override
     public Iterable<E> getAllVertices() {
+    	//for (E key : vertices.keySet()){
+    		//System.out.println(key.getClass());
+    	//}
         return vertices.keySet();
     }
 

@@ -81,26 +81,42 @@ public class GraphProcessor {
         // if these can come in a stream, populate the graph,
         // but also be added to an arrayList of words, then implementation of
         // Floyd-Warshall Path Reconstruction Algorithm should work
-    	if (WordProcessor.getWordStream(filePath).equals(null)){
-    		System.out.println("stream is null");
-    	}
+        if (WordProcessor.getWordStream(filePath).equals(null)){
+            System.out.println("stream is null");
+        }
         words = WordProcessor.getWordStream(filePath).collect(toList());
         Integer counter = 0;
         for (String word : words) {
             this.graph.addVertex(word);
-            counter++;
+        	counter++;
+        }
+        for (String word : words) {
             if (!this.graph.isEmpty()) {
                 // iterator
                 Iterator<String> itr = this.graph.getAllVertices().iterator();
                 // for each in iterator
-                itr.forEachRemaining(element-> {
-                    // do this method
-                    if(graph.isAdjacent(element, word)){
-                        graph.addEdge(element, word);
+                while(itr.hasNext()){
+                	String element = itr.next();
+                	if (WordProcessor.isAdjacent(element, word)){
+                        graph.addEdge(itr.next(), word);
                     }
-                });
+                }
             }
         }
+        /**
+        // iterator
+        Iterator<String> itr = this.graph.getAllVertices().iterator();
+        // for each in iterato
+        while(itr.hasNext()){
+        	String element = itr.next();
+        	System.out.println(element);
+        	Iterator<String> itr2 = this.graph.getNeighbors(element).iterator();
+        	while(itr2.hasNext()){
+        		System.out.println(1);
+        	}
+
+        }
+        */
         
         return counter;
     
