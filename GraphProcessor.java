@@ -141,6 +141,9 @@ public class GraphProcessor {
      */
     public List<String> getShortestPath(String word1, String word2) {
         String nextWord = "";
+    	word1 = word1.toUpperCase().trim();
+    	word2 = word2.toUpperCase().trim();
+    	
         int index1 = words.indexOf(word1);
         int index2 = words.indexOf(word2);
         List<String> path = new ArrayList<String>();
