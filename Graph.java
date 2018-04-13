@@ -199,4 +199,16 @@ public class Graph<E> implements GraphADT<E> {
     public boolean isEmpty() {
         return vertices.size()==0;
     }
+    
+    
+    public void printGraph() {
+    	for(Vertex<E> V : vertices.values()) {
+    		System.out.print(V.data + ": ");
+    		for(E W : V.neighbors) {
+    			System.out.print(W + ", ");
+    		}
+    		System.out.println();
+    	}
+    	
+    }
 }
