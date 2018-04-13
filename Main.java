@@ -2,8 +2,12 @@
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		try{
+			WordProcessor proc = new WordProcessor();
+		} catch (Exception e){
+			System.out.println(e.getStackTrace());
+		}
+		
 	}
 
 }

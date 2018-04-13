@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Supplier;
+import java.util.stream.Collector;
 import java.util.stream.Stream;
 
 /**
@@ -45,7 +46,7 @@ public class GraphProcessor {
      */
     private Graph<String> graph;
     private int graphSize;
-    ArrayList<String> words;
+    List<String> words;
     int[][] dist = new int[graphSize][graphSize];  // array of minimum distances
     String[][] next = new String[graphSize][graphSize];  // array of vertex indices
     
@@ -81,9 +82,10 @@ public class GraphProcessor {
         // Floyd-Warshall Path Reconstruction Algorithm should work
         
         Stream<String> wordStream = WordProcessor.getWordStream(filePath);
-        wordStream.forEach(words::add);
+		//Collector<Object> collector = new Collector<Object>();
+        words = wordStream.collect(toList());
         Integer counter = 0;
-        for (String word : this.words) {
+        for (String word : words) {
             this.graph.addVertex(word);
             counter++;
             if (!this.graph.isEmpty()) {
