@@ -1,4 +1,6 @@
+
 import java.io.IOException;
+import java.util.List;
 
 public class Main {
 
@@ -12,7 +14,11 @@ public class Main {
        }
        
        proc.shortestPathPrecomputation();
-       System.out.println(proc.getShortestDistance("cat", "wheat"));
+       System.out.println();
+       List<String> test = proc.getShortestPath("cat", "wheat");
+       for (String word : test){
+    	   System.out.println(word);
+       }
     }
 
 }

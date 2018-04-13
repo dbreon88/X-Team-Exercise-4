@@ -47,9 +47,9 @@ public class GraphProcessor {
      */
     private Graph<String> graph;
     private int graphSize;
-    List<String> words;
-    int[][] dist; 
-    String[][] next;
+    private List<String> words;
+    private int[][] dist; 
+    private String[][] next;
     
     
 
@@ -155,6 +155,7 @@ public class GraphProcessor {
             // add first word to path
             path.add(word1);
             // while next word does not equal final word
+
             while (!nextWord.equals(word2)){
                 // get next word
                 nextWord = next[index1][index2];
@@ -174,7 +175,7 @@ public class GraphProcessor {
      *             cat
      *             rat
      *             hat
-     *             neat
+     *             heat
      *             wheat
      *             kit
      *  distance of the shortest path between cat and wheat, [cat, hat, heat, wheat]
@@ -203,7 +204,9 @@ public class GraphProcessor {
         graphSize = words.size();
         dist = new int[graphSize][graphSize];  // array of minimum distances
         next = new String[graphSize][graphSize];  // array of vertex indices
-        //java.util.Arrays.fill(dist, Integer.MAX_VALUE);  // fill with "infinity"
+        for (int[] row : dist){
+        	java.util.Arrays.fill(row, Integer.MAX_VALUE);  // fill with "infinity"
+        }
         //java.util.Arrays.fill(next, null);  //initial all to null
         
         Iterator<String> vertices_itr = graph.getAllVertices().iterator();
@@ -222,21 +225,20 @@ public class GraphProcessor {
                 dist[indexCur][indexEdge] = 1;
                 next[indexCur][indexEdge] = edgeVertice;
             }
-            for (int k = 0; k < words.size(); k ++){
-                for (int i = 0; i < words.size(); i++){
-                    for (int j = 0; j < words.size(); j++){
-                        // if a shorter distance between i and j is found 
-                        if (dist[i][j] > dist[i][k] + dist[k][j]){
-                            // update the distance
-                            dist[i][j] = dist[i][k] + dist[k][j];
-                            // fix the link
-                            next[i][j] = next[i][k];
-                        }
+        }
+        for (int k = 0; k < words.size(); k ++){
+            for (int i = 0; i < words.size(); i++){
+                for (int j = 0; j < words.size(); j++){
+                    // if a shorter distance between i and j is found 
+                    if (dist[i][j] > dist[i][k] + dist[k][j]){
+                        // update the distance
+                        dist[i][j] = dist[i][k] + dist[k][j];
+                        // fix the link
+                        next[i][j] = next[i][k];
                     }
                 }
             }
         }
-    }
-    
-    
+        System.out.println("hey");
+    } 
 }
