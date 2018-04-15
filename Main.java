@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
        GraphProcessor proc = new GraphProcessor();
        try {
-       proc.populateGraph("/Users/stevenberry/Downloads/word_list.txt");
+       proc.populateGraph("word_list.txt");
        }
        catch (IOException e) {
            System.out.println(e.getMessage());
@@ -15,7 +15,9 @@ public class Main {
        
        proc.shortestPathPrecomputation();
        System.out.println();
-       List<String> test = proc.getShortestPath("cat", "wheat");
+       System.out.println(proc.getShortestDistance("hat", "wheat"));
+       System.out.println();
+       List<String> test = proc.getShortestPath("hat", "wheat");
        for (String word : test){
     	   System.out.println(word);
        }
