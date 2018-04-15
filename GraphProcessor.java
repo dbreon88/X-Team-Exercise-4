@@ -207,10 +207,7 @@ public class GraphProcessor {
         for (int[] row : dist){
         	java.util.Arrays.fill(row, Integer.MAX_VALUE);  // fill with "infinity"
         }
-        //java.util.Arrays.fill(next, null);  //initial all to null
-        
         Iterator<String> vertices_itr = graph.getAllVertices().iterator();
-        // below could be a pretty cool lambda expression if we want
         // populate the arrays dist and next
         // for every vertice in graph
         while (vertices_itr.hasNext()){
@@ -221,24 +218,25 @@ public class GraphProcessor {
             while (edge_itr.hasNext()){
                 String edgeVertice = edge_itr.next();
                 int indexEdge = words.indexOf(edgeVertice);
-                // I hope this works:
                 dist[indexCur][indexEdge] = 1;
                 next[indexCur][indexEdge] = edgeVertice;
             }
         }
         for (int k = 0; k < words.size(); k ++){
             for (int i = 0; i < words.size(); i++){
+            	if (next[i][k] == null){
+            		continue;
+            	}
                 for (int j = 0; j < words.size(); j++){
                     // if a shorter distance between i and j is found 
                     if (dist[i][j] > dist[i][k] + dist[k][j]){
                         // update the distance
                         dist[i][j] = dist[i][k] + dist[k][j];
                         // fix the link
-                        next[i][j] = next[i][k];
+                        next[i][j] = next[k][j];
                     }
                 }
             }
         }
-        System.out.println("hey");
     } 
 }
