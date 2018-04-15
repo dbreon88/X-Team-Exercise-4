@@ -150,14 +150,13 @@ public class GraphProcessor {
         int index2 = words.indexOf(word2);
         List<String> path = new ArrayList<String>();
         // if path does not exist
-        if (next[index1][index2] == null && dist[index1][index2] != 0){
+        if (next[index1][index2] == null){
             return path;  // return empty path
         }
         else{
             // add first word to path
             path.add(word1);
             // while next word does not equal final word
-            nextWord = word1;
             while (!nextWord.equals(word2)){
                 // get next word
                 nextWord = next[index1][index2];
@@ -188,6 +187,9 @@ public class GraphProcessor {
      * @return Integer distance
      */
     public Integer getShortestDistance(String word1, String word2) {
+    	if (getShortestPath(word1, word2).isEmpty()) {
+    		return -1;
+    	}
     	word1 = word1.toUpperCase().trim();
     	word2 = word2.toUpperCase().trim();
     	
@@ -231,7 +233,7 @@ public class GraphProcessor {
             	}
                 for (int j = 0; j < words.size(); j++){
                 	if (words.get(i).equals(words.get(j))){
-                		dist[i][j] = 0;
+                		dist[i][j] = -1;
                 		next[i][j] = null;
                 	}
                 	// if a shorter distance between i and j is found 
