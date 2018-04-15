@@ -28,7 +28,7 @@ public class GraphProcessorTest {
     @Before
     public void setUp() throws Exception {
         this.processor = new GraphProcessor();
-        processor.populateGraph("/Users/stevenberry/Downloads/word_list.txt");
+        processor.populateGraph("/Users/administrator/eclipse-workspace/p4/src/word_list.txt");
     }
     
     @After
@@ -93,6 +93,21 @@ public class GraphProcessorTest {
     @Test
     public void testIsAdjacentIfWordsAreDuplicates() throws Exception {
         String[] strings = {"test", "test"};
-        assertEquals("words are duplicates", false, WordProcessor.isAdjacent(strings[0], strings[1]));
+        assertEquals("words are more than one character off by adding", false, WordProcessor.isAdjacent(strings[0], strings[1]));
     }
+    
+    @Test
+    public void testGetPath() throws Exception {
+        List<String> path = processor.getShortestPath("Carrier", "Weather");
+        boolean passed = true;
+        for (int i=0; i<path.size(); i++) {
+            if (i<path.size()-1) {
+                if (!WordProcessor.isAdjacent(path.get(i), path.get(i+1))) {
+                    passed = false;
+                }
+            }
+        }
+        assertEquals(passed, true);
+    }
+    
 }
