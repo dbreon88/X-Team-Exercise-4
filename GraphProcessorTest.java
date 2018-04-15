@@ -28,7 +28,7 @@ public class GraphProcessorTest {
     @Before
     public void setUp() throws Exception {
         this.processor = new GraphProcessor();
-        processor.populateGraph("/Users/administrator/eclipse-workspace/p4/src/word_list.txt");
+        processor.populateGraph("/Users/stevenberry/Downloads/word_list.txt");
         processor.shortestPathPrecomputation();
     }
 
@@ -142,6 +142,17 @@ public class GraphProcessorTest {
         int actual = -1;
         int distance = processor.getShortestDistance("supreme", "airfoil");
         assertEquals(actual, distance);
+    }
+    
+    @Test
+    public void testGetShortestPathIfNoPathExists() throws Exception {
+        processor.shortestPathPrecomputation();
+        boolean passed = true;
+        List<String> path = processor.getShortestPath("supreme", "airfoil");
+        for (String word : path) {
+            passed = false;
+        }
+        assertEquals(passed, true);
     }
 
 }
