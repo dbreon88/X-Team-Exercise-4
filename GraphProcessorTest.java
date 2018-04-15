@@ -179,20 +179,40 @@ public class GraphProcessorTest {
         assertTrue(path.isEmpty());
     }
 
+    /**
+     * This test checks the output of the method getShortestDistance(string,string) when the arguments are
+     * the same value. 
+     * Expected behavior is method will return an int value -1.
+     * Fails when any other value is returned. 
+     * @throws Exception
+     */
     @Test
     public void testGetShortestDistanceIfSameWords() throws Exception{
         int actual=-1;
         int distance =processor.getShortestDistance("rapine", "rapine");
         assertEquals(actual,distance);
     }
- 
+    /**
+     * This test checks whether the shortest distance returned is true between two words.
+     * This test checks this via the arguments "charge", and "gimlets"
+     * Computed distance is 78. 
+     * If any other distance is returned test will fail.
+     * @throws Exception
+     */
+    @Test
     public void testGetShortestDistanceIfWordsExists() throws Exception {
         int actual = 78;
         int distance = processor.getShortestDistance("charge", "gimlets");
         assertEquals(actual, distance);
     }
 
-
+    /**
+     * This test checks the distance returned when there is no path between the words. 
+     * Tests this via the arguments "supreme" and "airfoil"
+     * When this happens the method should return an int of value -1.
+     * Will fail when any other value is returned. 
+     * @throws Exception
+     */
     @Test
     public void testGetShortestDistanceIfNoPathExists() throws Exception {
         int actual = -1;
