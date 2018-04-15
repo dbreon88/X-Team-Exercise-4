@@ -205,7 +205,7 @@ public class GraphProcessor {
         dist = new int[graphSize][graphSize];  // array of minimum distances
         next = new String[graphSize][graphSize];  // array of vertex indices
         for (int[] row : dist){
-        	java.util.Arrays.fill(row, Integer.MAX_VALUE);  // fill with "infinity"
+        	java.util.Arrays.fill(row, 500000);  // fill with "infinity"
         }
         Iterator<String> vertices_itr = graph.getAllVertices().iterator();
         // populate the arrays dist and next
@@ -224,11 +224,14 @@ public class GraphProcessor {
         }
         for (int k = 0; k < words.size(); k ++){
             for (int i = 0; i < words.size(); i++){
-            	if (next[i][k] == null){
+            	if (next[i][k] == null){  // optimization
             		continue;
             	}
                 for (int j = 0; j < words.size(); j++){
-                    // if a shorter distance between i and j is found 
+                	System.out.println("i, j: " + dist[i][j]);
+                	System.out.println("i, k: " + dist[i][k]);
+                	System.out.println("k, j: " + dist[k][j]);
+                	// if a shorter distance between i and j is found 
                     if (dist[i][j] > dist[i][k] + dist[k][j]){
                         // update the distance
                         dist[i][j] = dist[i][k] + dist[k][j];
