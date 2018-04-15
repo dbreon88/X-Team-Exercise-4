@@ -105,7 +105,13 @@ public class GraphProcessor {
                 }
             }
             return counter;
-        } catch (Exception e) {
+        } catch (IOException e) {
+            System.out.println("IOException in populateGraph()");
+            System.out.println(e.getMessage());
+            return -1;
+        }
+        catch (Exception f) {
+            System.out.println(f.getMessage());
             return -1;
         }
         /**
