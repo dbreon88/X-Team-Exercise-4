@@ -29,6 +29,7 @@ public class GraphProcessorTest {
     public void setUp() throws Exception {
         this.processor = new GraphProcessor();
         processor.populateGraph("word_list.txt");
+        processor.shortestPathPrecomputation();
     }
     
     @After
@@ -112,7 +113,6 @@ public class GraphProcessorTest {
     }
     @Test
     public void testGetShortestDistanceIfWordsExists() throws Exception {
-        processor.shortestPathPrecomputation();
        int actual =78;
        int distance= processor.getShortestDistance("charge", "gimlets");
        assertEquals(actual,distance);
@@ -120,10 +120,13 @@ public class GraphProcessorTest {
     
 
     @Test
-    public void testGetShortestDistanceIfNoWordsExists() throws Exception {
-        processor.shortestPathPrecomputation();
-        
+    public void testGetShortestDistanceIfSameWords() throws Exception{
+        int actual=-1;
+        int distance =processor.getShortestDistance("rapine", "rapine");
+        assertEquals(actual,distance);
     }
+    
+    
     
 
 
