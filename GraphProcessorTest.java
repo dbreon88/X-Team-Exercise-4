@@ -96,7 +96,7 @@ public class GraphProcessorTest {
         assertEquals("words are more than one character off by adding", false, WordProcessor.isAdjacent(strings[0], strings[1]));
     }
     
-    @Test
+  @Test
     public void testGetPath() throws Exception {
         processor.shortestPathPrecomputation();
         List<String> path = processor.getShortestPath("Carrier", "Weather");
@@ -117,6 +117,15 @@ public class GraphProcessorTest {
        int distance= processor.getShortestDistance("charge", "gimlets");
        assertEquals(actual,distance);
     }
+<<<<<<< HEAD
+=======
+    
+
+    @Test
+    public void testGetShortestDistanceIfNoWordsExists() throws Exception {
+        processor.shortestPathPrecomputation();
+    }
+>>>>>>> ddd7b45120c492f410443370ffb2e1bd539dda50
     
 
     @Test
