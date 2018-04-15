@@ -1,15 +1,7 @@
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.function.Supplier;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import static java.util.stream.Collectors.toList;
 
 /**
@@ -77,33 +69,31 @@ public class GraphProcessor {
      * @param filepath file path to the dictionary
      * @return Integer the number of vertices (words) added
      */
-    public Integer populateGraph(String filePath) throws IOException {
-        // if these can come in a stream, populate the graph,
-        // but also be added to an arrayList of words, then implementation of
-        // Floyd-Warshall Path Reconstruction Algorithm should work
-        if (WordProcessor.getWordStream(filePath).equals(null)) {
-            System.out.println("stream is null");
-        }
-        try {
-            words = WordProcessor.getWordStream(filePath).collect(toList());
-            Integer counter = 0;
-            for (String word : words) {
-                this.graph.addVertex(word);
-                counter++;
-            }
-            for (String word : words) {
-                if (!this.graph.isEmpty()) {
-                    // iterator
-                    Iterator<String> itr = this.graph.getAllVertices().iterator();
-                    // for each in iterator
-                    while (itr.hasNext()) {
-                        String element = itr.next();
-                        if (WordProcessor.isAdjacent(element, word)) {
-                            graph.addEdge(element, word);
-                        }
-                    }
-                }
-            }
+    public Integer populateGraph(String filePath) throws IOException{
+    	try{
+	    	// get word stream and save to an array list of words
+	        words = WordProcessor.getWordStream(filePath).collect(toList());
+	        Integer counter = 0;
+	        // add each word to the graph
+	        for (String word : words) {
+	            this.graph.addVertex(word);
+	        	counter++;
+	        }
+	        // for each word
+	        for (String word : words) {
+	            if (!this.graph.isEmpty()) {
+	                Iterator<String> itr = this.graph.getAllVertices().iterator();
+	                // for each neighbor of word
+	                while(itr.hasNext()){
+	                	String element = itr.next();
+	                	// if the words are adjacent
+	                	if (WordProcessor.isAdjacent(element, word)){
+	                		// add an edge
+	                        graph.addEdge(element, word);
+	                	}
+	                }
+	            }
+	        }
             return counter;
         } catch (IOException e) {
             System.out.println("IOException in populateGraph()");
@@ -114,20 +104,7 @@ public class GraphProcessor {
             System.out.println(f.getMessage());
             return -1;
         }
-        /**
-         * // iterator Iterator<String> itr = this.graph.getAllVertices().iterator(); // for each in
-         * iterato while(itr.hasNext()){ String element = itr.next(); System.out.println(element);
-         * Iterator<String> itr2 = this.graph.getNeighbors(element).iterator();
-         * System.out.println("Neighbors: "); while(itr2.hasNext()){ System.out.print(itr2.next()
-         * +", "); } System.out.println(); System.out.println();
-         * 
-         * }
-         */
-
-        // return counter;
-
     }
-
 
     /**
      * Gets the list of words that create the shortest path between word1 and word2
@@ -177,16 +154,15 @@ public class GraphProcessor {
      * @return Integer distance
      */
     public Integer getShortestDistance(String word1, String word2) {
-        if (getShortestPath(word1, word2).isEmpty()) {
-            return -1;
-        }
-        word1 = word1.toUpperCase().trim();
-        word2 = word2.toUpperCase().trim();
-
+    	// if the path does not exist (same word or not connected)
+    	if (getShortestPath(word1, word2).isEmpty()) {
+    		return -1;
+    	}
+    	word1 = word1.toUpperCase().trim();
+    	word2 = word2.toUpperCase().trim();
+    	
         int index1 = words.indexOf(word1);
-        
         int index2 = words.indexOf(word2);
-        System.out.println(index2);
         return dist[index1][index2];
     }
 
@@ -204,7 +180,6 @@ public class GraphProcessor {
             java.util.Arrays.fill(row, 500000); // fill with "infinity"
         }
         Iterator<String> vertices_itr = graph.getAllVertices().iterator();
-        // populate the arrays dist and next
         // for every vertice in graph
         while (vertices_itr.hasNext()) {
             String curVertice = vertices_itr.next();
@@ -214,22 +189,27 @@ public class GraphProcessor {
             while (edge_itr.hasNext()) {
                 String edgeVertice = edge_itr.next();
                 int indexEdge = words.indexOf(edgeVertice);
+                // set distance between the two as 1
                 dist[indexCur][indexEdge] = 1;
+                // set the connection between the two
                 next[indexCur][indexEdge] = edgeVertice;
             }
         }
-        for (int k = 0; k < words.size(); k++) {
-            for (int i = 0; i < words.size(); i++) {
-                if (next[i][k] == null) { // optimization
-                    continue;
-                }
-                for (int j = 0; j < words.size(); j++) {
-                    if (words.get(i).equals(words.get(j))) {
-                        dist[i][j] = 0;
-                        next[i][j] = null;
-                    }
-                    // if a shorter distance between i and j is found
-                    if (dist[i][j] > dist[i][k] + dist[k][j]) {
+        // Floyd-Warshall Algorithm
+        for (int k = 0; k < words.size(); k ++){
+            for (int i = 0; i < words.size(); i++){
+            	if (next[i][k] == null){  // optimization if path does not exist
+            		continue;
+            	}
+                for (int j = 0; j < words.size(); j++){
+                	// if the words are the same
+                	if (words.get(i).equals(words.get(j))){
+                		// distance is 0
+                		dist[i][j] = 0;
+                		// connection is null
+                		next[i][j] = null;
+                	} else if (dist[i][j] > dist[i][k] + dist[k][j]) { 
+                	// if a shorter distance between i and j is found 
                         // update the distance
                         dist[i][j] = dist[i][k] + dist[k][j];
                         // fix the link
