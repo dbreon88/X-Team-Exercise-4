@@ -81,18 +81,16 @@ public class GraphProcessor {
 	        }
 	        // for each word
 	        for (String word : words) {
-	            if (!this.graph.isEmpty()) {
-	                Iterator<String> itr = this.graph.getAllVertices().iterator();
-	                // for each neighbor of word
-	                while(itr.hasNext()){
-	                	String element = itr.next();
-	                	// if the words are adjacent
-	                	if (WordProcessor.isAdjacent(element, word)){
-	                		// add an edge
-	                        graph.addEdge(element, word);
-	                	}
-	                }
-	            }
+                Iterator<String> itr = this.graph.getAllVertices().iterator();
+                // for each neighbor of word
+                while(itr.hasNext()){
+                	String element = itr.next();
+                	// if the words are adjacent
+                	if (WordProcessor.isAdjacent(element, word)){
+                		// add an edge
+                        graph.addEdge(element, word);
+                	}
+                }
 	        }
             return counter;
         } catch (IOException e) {
