@@ -117,14 +117,15 @@ public class GraphProcessorTest {
        int distance= processor.getShortestDistance("charge", "gimlets");
        assertEquals(actual,distance);
     }
-
+    
 
     @Test
     public void testGetShortestDistanceIfNoWordsExists() throws Exception {
         processor.shortestPathPrecomputation();
+        
     }
-
     
+
 
 
 }
