@@ -150,14 +150,14 @@ public class GraphProcessor {
         int index2 = words.indexOf(word2);
         List<String> path = new ArrayList<String>();
         // if path does not exist
-        if (next[index1][index2] == null){
+        if (next[index1][index2] == null && dist[index1][index2] != 0){
             return path;  // return empty path
         }
         else{
             // add first word to path
             path.add(word1);
             // while next word does not equal final word
-
+            nextWord = word1;
             while (!nextWord.equals(word2)){
                 // get next word
                 nextWord = next[index1][index2];
@@ -230,17 +230,6 @@ public class GraphProcessor {
             		continue;
             	}
                 for (int j = 0; j < words.size(); j++){
-                	/**
-                	System.out.println();
-                	System.out.println("current i: " + words.get(i));
-                	System.out.println("goal j: " + words.get(j));
-                	System.out.println("next k, j : " + next[k][j]);
-                	
-                	System.out.println("word k: " + words.get(k));
-                	System.out.println("dist i, j: " + dist[i][j]);
-                	System.out.println("dist i, k: " + dist[i][k]);
-                	System.out.println("dist k, j : " + dist[k][j]);
-                	*/
                 	if (words.get(i).equals(words.get(j))){
                 		dist[i][j] = 0;
                 		next[i][j] = null;
