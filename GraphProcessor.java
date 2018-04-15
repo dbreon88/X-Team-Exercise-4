@@ -230,28 +230,27 @@ public class GraphProcessor {
             		continue;
             	}
                 for (int j = 0; j < words.size(); j++){
-                	
+                	/**
                 	System.out.println();
                 	System.out.println("current i: " + words.get(i));
                 	System.out.println("goal j: " + words.get(j));
                 	System.out.println("next k, j : " + next[k][j]);
                 	
+                	System.out.println("word k: " + words.get(k));
+                	System.out.println("dist i, j: " + dist[i][j]);
+                	System.out.println("dist i, k: " + dist[i][k]);
+                	System.out.println("dist k, j : " + dist[k][j]);
+                	*/
                 	if (words.get(i).equals(words.get(j))){
                 		dist[i][j] = 0;
                 		next[i][j] = null;
                 	}
                 	// if a shorter distance between i and j is found 
-                    if (dist[i][j] > dist[i][k] + dist[k][j]) {
-                    	
-                    	System.out.println("word k: " + words.get(k));
-                    	System.out.println("dist i, j: " + dist[i][j]);
-                    	System.out.println("dist i, k: " + dist[i][k]);
-                    	System.out.println("dist k, j : " + dist[k][j]);
-                    	
+                    if (dist[i][j] > dist[i][k] + dist[k][j]) { 	
                         // update the distance
                         dist[i][j] = dist[i][k] + dist[k][j];
                         // fix the link
-                        next[i][j] = next[k][j];
+                        next[i][j] = next[i][k];
                     }
                 }
             }
