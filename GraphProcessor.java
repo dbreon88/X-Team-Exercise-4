@@ -188,9 +188,10 @@ public class GraphProcessor {
     public Integer getShortestDistance(String word1, String word2) {
     	word1 = word1.toUpperCase().trim();
     	word2 = word2.toUpperCase().trim();
-    	
         int index1 = words.indexOf(word1);
+        
         int index2 = words.indexOf(word2);
+        System.out.println(index2);
         return dist[index1][index2];
     }
     
@@ -205,7 +206,7 @@ public class GraphProcessor {
         dist = new int[graphSize][graphSize];  // array of minimum distances
         next = new String[graphSize][graphSize];  // array of vertex indices
         for (int[] row : dist){
-        	java.util.Arrays.fill(row, Integer.MAX_VALUE);  // fill with "infinity"
+        	java.util.Arrays.fill(row, 500);  // fill with "infinity"
         }
         Iterator<String> vertices_itr = graph.getAllVertices().iterator();
         // populate the arrays dist and next
