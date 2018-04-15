@@ -15,13 +15,7 @@ public class Main {
        
        proc.shortestPathPrecomputation();
        System.out.println();
-<<<<<<< HEAD
        List<String> test = proc.getShortestPath("define", "shinny");
-=======
-       System.out.println(proc.getShortestDistance("hat", "wheat"));
-       System.out.println();
-       List<String> test = proc.getShortestPath("hat", "wheat");
->>>>>>> ddd7b45120c492f410443370ffb2e1bd539dda50
        for (String word : test){
     	   System.out.println(word);
        }

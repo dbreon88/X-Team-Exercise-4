@@ -208,11 +208,8 @@ public class GraphProcessor {
         dist = new int[graphSize][graphSize];  // array of minimum distances
         next = new String[graphSize][graphSize];  // array of vertex indices
         for (int[] row : dist){
-<<<<<<< HEAD
-        	java.util.Arrays.fill(row, 500);  // fill with "infinity"
-=======
+
         	java.util.Arrays.fill(row, 500000);  // fill with "infinity"
->>>>>>> a2832af664b1446ee112a5a4398d44037d8c4970
         }
         Iterator<String> vertices_itr = graph.getAllVertices().iterator();
         // populate the arrays dist and next
