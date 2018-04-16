@@ -1,12 +1,31 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+//
+// Title: X-Team Exercise #4
+// Files: Graph.java, GraphProcessor.java, WordProcessor.java, 
+//			GraphProcessorTest.java
+// Course: CS400, Spring 2018
+//
+// Authors: Dylan Breon, Steven Berry, Elliot Braem, Adam Bin Mohammed Azmil,
+//				Jesse Brodacz
+// Emails: dbreon@wisc.edu, shberry@wisc.edu, ebraem@wisc.edu, Binmohammeda@wisc.edu, brodacz@wisc.edu
+// Lecturers name: Deb Deppeler
+//
+// Due Date: Monday, April 16th, 10:00 pm
+//
+// Known Bugs: NONE
+//
+
+
 /**
- * Undirected and unweighted graph implementation
+ * Undirected and unweighted graph implementation using a HashMap
+ * function. A Hashmap implementation is used to drastically reduce 
+ * time complexity and effectively find and use locations in our graph
+ * for manipulation. We use a inner class Vertex<T> which acts as our vertices
+ * for our graph. 
  * 
  * @param <E> type of a vertex
- * 
- * @author sapan (sapan@cs.wisc.edu)
  * 
  */
 public class Graph<E> implements GraphADT<E> {
