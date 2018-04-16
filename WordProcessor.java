@@ -3,10 +3,29 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
+//
+// Title: X-Team Exercise #4
+// Files: Graph.java, GraphProcessor.java, WordProcessor.java, 
+//			GraphProcessorTest.java
+// Course: CS400, Spring 2018
+//
+// Authors: Dylan Breon, Steven Berry, Elliot Braem, Adam Bin Mohammed Azmil,
+//				Jesse Brodacz
+// Emails: dbreon@wisc.edu, shberry@wisc.edu, ebraem@wisc.edu, Binmohammeda@wisc.edu, brodacz@wisc.edu
+// Lecturers name: Deb Deppeler
+//
+// Due Date: Monday, April 16th, 10:00 pm
+//
+// Known Bugs: NONE
+//
+
+
 /**
- * This class contains some utility helper methods
+ * The WordProcessor class utilizes Stream functionality to 
+ * access a file with a list of words and helps to put these 
+ * words into a graph. This class acts a helper class to the 
+ * @see GraphProcessor class.
  * 
- * @author sapan (sapan@cs.wisc.edu)
  */
 public class WordProcessor {
     
