@@ -9,10 +9,25 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+//
+// Title: X-Team Exercise #4
+// Files: Graph.java, GraphProcessor.java, WordProcessor.java, 
+//			GraphProcessorTest.java
+// Course: CS400, Spring 2018
+//
+// Authors: Dylan Breon, Steven Berry, Elliot Braem, Adam Bin Mohammed Azmil,
+//				Jesse Brodacz
+// Emails: dbreon@wisc.edu, shberry@wisc.edu, ebraem@wisc.edu, Binmohammeda@wisc.edu, brodacz@wisc.edu
+// Lecturers name: Deb Deppeler
+//
+// Due Date: Monday, April 16th, 10:00 pm
+//
+// Known Bugs: NONE
+//
+
 /**
  * Junit test class to test class @see Graph that implements @see GraphADT interface
  *
- * @author sapan (sapan@cs.wisc.edu)
  */
 public class GraphTest {
 
