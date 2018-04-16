@@ -10,6 +10,30 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 
+//
+//Title: X-Team Exercise #4
+//Files: Graph.java, GraphProcessor.java, WordProcessor.java, 
+//			GraphProcessorTest.java
+//Course: CS400, Spring 2018
+//
+//Authors: Dylan Breon, Steven Berry, Elliot Braem, Adam Bin Mohammed Azmil,
+//				Jesse Brodacz
+//Emails: dbreon@wisc.edu, shberry@wisc.edu, ebraem@wisc.edu, Binmohammeda@wisc.edu, brodacz@wisc.edu
+//Lecturers name: Deb Deppeler
+//
+//Due Date: Monday, April 16th, 10:00 pm
+//
+//Known Bugs: NONE
+//
+
+/**
+ * 
+ * JUnit tester class that checks the full functionality of our @see graphProcessor and 
+ * @see WordProcessor classes.
+ * 
+ * MUST enter absolute file path location in order to access the word_list.txt file. 
+ *
+ */
 public class GraphProcessorTest {
 
     private GraphProcessor processor;
@@ -28,6 +52,7 @@ public class GraphProcessorTest {
     @Before
     public void setUp() throws Exception {
         this.processor = new GraphProcessor();
+        //MUST put absolute file path location in order to access the word_list.txt properly
         processor.populateGraph("/Users/stevenberry/Downloads/word_list.txt");
         processor.shortestPathPrecomputation();
     }
@@ -159,6 +184,12 @@ public class GraphProcessorTest {
                         WordProcessor.isAdjacent(strings[0], strings[1]));
     }
 
+    /**
+     * tests that the shortest path method finds and returns
+     * the correct path and the length the path takes from one 
+     * vertex to another.
+     * @throws Exception
+     */
     @Test
     public void testGetShortestPath() throws Exception {
         List<String> path = processor.getShortestPath("Carrier", "Weather");
@@ -173,6 +204,11 @@ public class GraphProcessorTest {
         assertTrue(passed);
     }
     
+    /**
+     * tests that the shortest path between 2 of the same
+     * vertices will be empty
+     * @throws Exception
+     */
     @Test
     public void testGetShortestPathSameArguments() throws Exception {
         List<String> path = processor.getShortestPath("Carrier", "Carrier");
@@ -220,6 +256,11 @@ public class GraphProcessorTest {
         assertEquals(actual, distance);
     }
     
+    /**
+     * tests that the shortest path will be empty if there is
+     * no path between 2 vertices. 
+     * @throws Exception
+     */
     @Test
     public void testGetShortestPathIfNoPathExists() throws Exception {
         processor.shortestPathPrecomputation();
@@ -228,5 +269,3 @@ public class GraphProcessorTest {
     }
 
 }
-
-    
