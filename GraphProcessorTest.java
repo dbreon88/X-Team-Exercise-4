@@ -31,7 +31,7 @@ import org.junit.Test;
  * JUnit tester class that checks the full functionality of our @see graphProcessor and 
  * @see WordProcessor classes.
  * 
- * NOTE: MUST enter absolute file path location in order to access the word_list.txt file. 
+ * NOTE: MUST enter correct file path location in order to access the word_list.txt file. 
  *
  */
 public class GraphProcessorTest {
@@ -52,7 +52,7 @@ public class GraphProcessorTest {
     @Before
     public void setUp() throws Exception {
         this.processor = new GraphProcessor();
-        //MUST put absolute file path location in order to access the word_list.txt properly
+        //MUST put correct location of words_list.txt
         processor.populateGraph("/Users/stevenberry/Downloads/word_list.txt");
         processor.shortestPathPrecomputation();
     }
