@@ -31,7 +31,7 @@ import org.junit.Test;
  * JUnit tester class that checks the full functionality of our @see graphProcessor and 
  * @see WordProcessor classes.
  * 
- * MUST enter absolute file path location in order to access the word_list.txt file. 
+ * NOTE: MUST enter absolute file path location in order to access the word_list.txt file. 
  *
  */
 public class GraphProcessorTest {
